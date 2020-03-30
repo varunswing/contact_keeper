@@ -10,13 +10,18 @@ const User = require('../models/User');
 router.post(
 	'/',
 	[
-		check('name', 'Please add a name').not().isEmpty(),
+		check('name', 'Please add a name')
+			.not()
+			.isEmpty(),
 		check('email', 'Please enter a valid email').isEmail(),
-		check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
+		check(
+			'password',
+			'Please enter a password with 6 or more characters'
+		).isLength({ min: 6 })
 	],
 	(req, res) => {
 		const errors = validationResult(req);
-		if(!errors.isEmpty()){
+		if (!errors.isEmpty()) {
 			return res.status(400).json({ errors: errors.array() });
 		}
 
